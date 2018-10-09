@@ -1,0 +1,17 @@
+{
+  "name": "buxi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "hbs": "^4.0.1",
+    "mongoose": "^5.3.2",
+    "nodemon": "^1.18.4"
+  }
+}
