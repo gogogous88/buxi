@@ -57,7 +57,10 @@ const DayTimePicker = props => {
               // borderWidth: 1
             }}
           >
-            <TouchableHighlight style={aStyles.tagView}>
+            <TouchableHighlight
+              style={aStyles.tagView}
+              onPress={() => props.onTagChosen(index)}
+            >
               <Text style={aStyles.text}>{day.day}</Text>
             </TouchableHighlight>
             <View style={aStyles.tagView}>

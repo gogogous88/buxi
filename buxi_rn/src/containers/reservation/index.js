@@ -76,6 +76,13 @@ export default class Reservation extends Component {
     this.setState({ modalVisible: visible });
   };
 
+  onTagChosen = index => {
+    const days = this.state.days;
+    console.log("days[index]", days[index].time);
+    days[index].time = "n/a";
+    this.setState({ days });
+  };
+
   renderDayTimeModal = () => {
     return (
       <View style={{ marginTop: 0 }}>
@@ -87,7 +94,10 @@ export default class Reservation extends Component {
             Alert.alert("Modal has been closed.");
           }}
         >
-          <DayTimePicker days={this.state.days} />
+          <DayTimePicker
+            days={this.state.days}
+            onTagChosen={this.onTagChosen}
+          />
         </Modal>
       </View>
     );
