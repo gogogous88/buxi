@@ -15,25 +15,37 @@ const styles = {
   text: { fontSize: 16, fontWeight: "bold", margin: 20, color: "white" }
 };
 
-renderItem = ({ item: rowData }) => {
-  return (
-    <View style={styles.flatList}>
-      <Text style={styles.text}>{rowData.day}</Text>
-      <Text style={styles.text}>{rowData.time}</Text>
-    </View>
-  );
-};
-
-const HorizontalFlatList = props => {
-  return (
-    <FlatList
-      data={props.data}
-      renderItem={this.renderItem}
-      showsHorizontalScrollIndicator={false}
-      keyExtractor={(item, index) => item.day}
-      horizontal
-    />
-  );
-};
+class HorizontalFlatList extends React.Component {
+  state = { data: [] };
+  componentDidMount = () => {
+    this.setState({ data: this.props.data });
+  };
+  componentWillReceiveProps = newProps => {
+    if (this.props.data != newProps.data) {
+      console.log(newProps.data);
+      this.setState({ data: newProps.data });
+    }
+  };
+  renderItem = ({ item: rowData }) => {
+    console.log(rowData);
+    return (
+      <View style={styles.flatList}>
+        <Text style={styles.text}>{rowData.day}</Text>
+        <Text style={styles.text}>{rowData.selected ? "8:00" : "N/A"}</Text>
+      </View>
+    );
+  };
+  render() {
+    return (
+      <FlatList
+        data={this.state.data}
+        renderItem={this.renderItem}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item, index) => item.day}
+        horizontal
+      />
+    );
+  }
+}
 
 export default HorizontalFlatList;

@@ -15,7 +15,7 @@ const styles = {
     height: width / 2,
     width: width / 2 - 40,
     borderRadius: 5,
-    backgroundColor: "white",
+    backgroundColor: "rgba(0,0,0,0.3)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
@@ -27,14 +27,16 @@ const DuoDatePicker = props => {
   const today = props.date;
   return (
     <TouchableOpacity style={styles.box} onPress={props.onPress}>
-      <Text style={{ fontSize: 16 }}>{props.label}</Text>
-      <Text style={{ fontSize: 18, fontWeight: "200" }}>
+      <Text style={{ fontSize: 16, color: "white" }}>{props.label}</Text>
+      <Text style={{ fontSize: 18, fontWeight: "200", color: "white" }}>
         {`${moment(today).format("MMM")} | ${moment(today).format("ddd")}`}
       </Text>
-      <Text style={{ fontSize: 50, fontWeight: "200" }}>
+      <Text style={{ fontSize: 50, fontWeight: "200", color: "white" }}>
         {moment(today).format("DD")}
       </Text>
-      <Text style={{ fontSize: 14 }}>{moment(today).format("YYYY")}</Text>
+      <Text style={{ fontSize: 14, color: "white" }}>
+        {moment(today).format("YYYY")}
+      </Text>
     </TouchableOpacity>
   );
 };

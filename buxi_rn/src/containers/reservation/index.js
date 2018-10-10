@@ -43,19 +43,17 @@ export default class Reservation extends Component {
   constructor(props) {
     super(props);
     let today = moment(new Date());
-    let tomorrow = moment(new Date()).add(1, "days");
+    let tomorrow = moment(new Date()).add(100, "days");
     this.state = {
       modalVisible: false,
       inputModalVisible: false,
       date: [today, tomorrow],
       days: [
-        { day: "Mon", time: "08:00" },
-        { day: "Tue", time: "08:00" },
-        { day: "Wed", time: "08:00" },
-        { day: "Thu", time: "08:00" },
-        { day: "Fri", time: "08:00" },
-        { day: "Sat", time: "08:00" },
-        { day: "Sun", time: "08:00" }
+        { day: "mon", selected: true, dates: [] },
+        { day: "tue", selected: true, dates: [] },
+        { day: "wed", selected: true, dates: [] },
+        { day: "thr", selected: true, dates: [] },
+        { day: "fri", selected: true, dates: [] }
       ],
       time: ["8:00"],
       phone: "3478286553",
@@ -76,16 +74,22 @@ export default class Reservation extends Component {
     this.setState({ modalVisible: visible });
   };
 
-  onTagChosen = index => {
+  onSelectChange = index => {
     const days = this.state.days;
-    console.log("days[index]", days[index].time);
-    days[index].time = "n/a";
+    days[index].selected = !days[index].selected;
     this.setState({ days });
+  };
+
+  pickupDates = (index, dates) => {
+    const days = this.state.days;
+    days[index].dates = dates;
+    this.setState({ days });
+    console.log("this.state.days", days);
   };
 
   renderDayTimeModal = () => {
     return (
-      <View style={{ marginTop: 0 }}>
+      <View>
         <Modal
           animationType="slide"
           transparent={false}
@@ -93,10 +97,13 @@ export default class Reservation extends Component {
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
           }}
+          style={{ width, height }}
         >
           <DayTimePicker
+            date={this.state.date}
             days={this.state.days}
-            onTagChosen={this.onTagChosen}
+            onSelectChange={this.onSelectChange}
+            onConfirm={() => this.setState({ modalVisible: false })}
           />
         </Modal>
       </View>
@@ -240,7 +247,7 @@ export default class Reservation extends Component {
             style={{
               width: width - 20,
               height: 130,
-              backgroundColor: "rgba(0,0,0,0.6)"
+              backgroundColor: "rgba(0,0,0,0.3)"
             }}
           >
             <HorizontalFlatList data={this.state.days} />
