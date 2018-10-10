@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 mongoose.connect(
-  "mongodb://buxi:buxi1234567890@ds227373.mlab.com:27373/buxi",
+  "mongodb://markmoo:abc621abc@ds227373.mlab.com:27373/buxi",
   { useNewUrlParser: true }
 );
 
