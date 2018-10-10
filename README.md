@@ -13,6 +13,9 @@
 # cd buxi_rn get into /buxi_rn directory run:
 
 yarn
+
+# then undersame directory:
+
 exp start
 
 # in another terminal cd buxi_rn:
