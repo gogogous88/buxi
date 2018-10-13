@@ -49,11 +49,15 @@ export default class Reservation extends Component {
       inputModalVisible: false,
       date: [today, tomorrow],
       days: [
-        { day: "mon", selected: true, dates: [] },
-        { day: "tue", selected: true, dates: [] },
-        { day: "wed", selected: true, dates: [] },
-        { day: "thr", selected: true, dates: [] },
-        { day: "fri", selected: true, dates: [] }
+        {
+          data: [
+            { day: "mon", selected: false, date: [] },
+            { day: "tue", selected: true, date: [] },
+            { day: "wed", selected: true, date: [] },
+            { day: "thu", selected: true, date: [] },
+            { day: "fri", selected: true, date: [] }
+          ]
+        }
       ],
       time: ["8:00"],
       phone: "3478286553",
@@ -76,7 +80,7 @@ export default class Reservation extends Component {
 
   onSelectChange = index => {
     const days = this.state.days;
-    days[index].selected = !days[index].selected;
+    days[0]["data"][index].selected = !days[0]["data"][index].selected;
     this.setState({ days });
   };
 
@@ -240,18 +244,20 @@ export default class Reservation extends Component {
             endDate={this.state.endDate}
             onConfirm={this.confirmDate}
           />
-          <TouchableHighlight
-            onPress={() => {
-              this.setModalVisible(!this.state.modalVisible);
-            }}
+          <View
             style={{
               width: width - 20,
               height: 130,
               backgroundColor: "rgba(0,0,0,0.3)"
             }}
           >
-            <HorizontalFlatList data={this.state.days} />
-          </TouchableHighlight>
+            <HorizontalFlatList
+              data={this.state.days}
+              onListPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+              }}
+            />
+          </View>
           <Button
             onPress={() => this.setState({ inputModalVisible: true })}
             buttonStyle={styles.buttonStyle}

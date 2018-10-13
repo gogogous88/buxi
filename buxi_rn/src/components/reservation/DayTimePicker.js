@@ -84,8 +84,7 @@ class DayTimePicker extends React.Component {
   };
   render() {
     const { props } = this;
-    let startDate = new Date(moment(props.date[0]));
-    let endDate = new Date(moment(props.date[1]));
+
     return (
       <View style={{ marginTop: 50 }}>
         <ScrollView>
@@ -93,7 +92,7 @@ class DayTimePicker extends React.Component {
             spacing={1}
             itemDimension={width / 3.5}
             style={styles.gridView}
-            items={props.days}
+            items={props.days[0]["data"]}
             renderItem={(item, index) => {
               const backgroundTint = item.selected ? "grey" : "white";
               const textTint = item.selected ? "white" : "black";
@@ -118,7 +117,7 @@ class DayTimePicker extends React.Component {
               -to:
               {moment(props.date[1]).format("YYYY-MM-DD")}
             </Text>
-            {props.days.map((day, index) => {
+            {props.days[0].data.map((day, index) => {
               if (day.selected) {
                 return (
                   <View key={index}>
